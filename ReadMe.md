@@ -10,5 +10,5 @@ This is using the awesome [Reveal.js](https://github.com/hakimel/reveal.js) by [
 To Use
 ======
 
-    docker build -t yourname/nginx .
-    docker run -p 80:80 -d yourname/nginx
+    docker build -t yourname/docker_workshop .
+    docker run -p 80:80 -d yourname/docker_workshop
