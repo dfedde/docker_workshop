@@ -3,7 +3,7 @@ Docker Slides
 
 This is a presentation on how to use Docker
 
-a live version of the slides it [here](http://docker_workshop.fedde.us)
+a live version of the slides is [here](http://docker_workshop.fedde.us)
 
 This is using the awesome [Reveal.js](https://github.com/hakimel/reveal.js) by [Hakim]( http://hakim.se/ )
 
