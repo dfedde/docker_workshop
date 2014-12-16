@@ -1,6 +1,8 @@
 Docker Slides
 =============
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dfedde/docker_workshop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is a presentation on how to use Docker
 
 a live version of the slides is [here](http://docker_workshop.fedde.us)
