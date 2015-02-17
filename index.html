@@ -1104,13 +1104,31 @@ Reveal.initialize({
     </script>
     <script>
 function completeLab(lab) {
-  var person = prompt("Please enter your name", "Harry Potter");
+  if (lab != null) {
+    $.ajax({
+        url: "http://docker_workshop.fedde.us:4567/done_with/"+lab,
+        xhrFields: {
+                  withCredentials: true
+                  },
+        success: function(msg){
+          alert(msg);
+        }
+    });
+  }
+}
+
+function login() {
+  var person = prompt("Please enter your name", "your name");
 
   if (person != null) {
     $.ajax({
-        url: "http://docker_workshop.fedde.us:4567/done/"+lab+"/"+person,
-        success: function(){
-          alert("thank you");
+        type: "POST",
+        url: "http://docker_workshop.fedde.us:4567/login?name="+person,
+        xhrFields: {
+                  withCredentials: true
+                  },
+        success: function(msg){
+          alert(msg);
         }
     });
   }
