@@ -76,22 +76,20 @@ if( window.location.search.match( /print-pdf/gi ) ) {
           </aside>
         </section>
 
-        <section>
-          <h3 class="fragment">my name is <a href="http://duncan.fedde.us"                       >Duncan Fedde</a></h3>
-          <h3 class="fragment">I live in <a  href="http://www.centennialco.gov/"          >Centennial, CO</a></h3>
-          <h3 class="fragment">I Do <a       href="https://www.ruby-lang.org/en/"         >Ruby development/operations</a></h3>
-          <h3 class="fragment">I Work @<a   href="http://ensercaeng.com/"                >Enserca Integrated Solutions</a></h3>
-          <h3 class="fragment">I tweet @<a  href="https://twitter.com/dfedde?lang=en"    >dfedde</a></h3>
-          <h3 class="fragment">I chat on <a  href="irc://irc.freenode.net/sofreeus"       >freenode/#sofreeus</a></h3>
-        </section>
+        <!-- <section> -->
+        <!--   <h3 class="fragment">my name is <a href="http://duncan.fedde.us">Duncan Fedde</a></h3> -->
+        <!-- </section> -->
 
         <section>
           <h2>What will we be doing Today?</h2>
           <ul>
-            <li class="fragment">using git</li>
-            <li class="fragment">using github</li>
-            <li class="fragment">using docker hub</li>
-            <li class="fragment">using docker</li>
+            <li class="fragment">make a image by hand</li>
+            <li class="fragment">make a image by dockerfile</li>
+            <li class="fragment">start an image</li>
+            <li class="fragment">handle data in a container</li>
+            <li class="fragment">handle port forwarding</li>
+            <li class="fragment">handle sharing data between containers</li>
+            <li class="fragment">provide a sample way to deploy docker on a server</li>
           </ul>
         </section>
 
@@ -104,13 +102,8 @@ if( window.location.search.match( /print-pdf/gi ) ) {
         </section>
 
         <section>
-          <p>
-          <small>Cue live demo</small>
-          </p>
-        </section>
-
-        <section>
           <h1>AAAAAAAAAAAAAAAAHHHHHHHHHHHHHH AN EXTRA SLIDE KILL IT NOW</h1>
+          <small class="fragment">Cue live demo</small>
         </section>
 
         <section>
@@ -124,21 +117,25 @@ if( window.location.search.match( /print-pdf/gi ) ) {
         </section>
 
         <section>
-          <h2>lets get some prereqs out of the way</h2>
+          <h2>But First</h2>
+          <h2 class="fragment">lets get some prereqs out of the way</h2>
         </section>
 
-        <section>
-          <h2>make a <a href="http://github.com">Github</a> account</h2>
-        </section>
-
-        <section>
-          <h2>make a <a href="https://hub.docker.com/account/signup/">Dockerhub</a> account</h2>
-          <h3>you can use your Github credentials</h3>
-        </section>
-        <section>
-          <h2>make a <a onclick="login()">Done</a> session</h2>
-          <h3>you can use your Github credentials</h3>
-        </section>
+        <!-- make these prereqs -->
+        <!-- <section> -->
+        <!--   <h2>make a <a href="http://github.com">Github</a> account</h2> -->
+        <!-- </section> -->
+        <!--  -->
+        <!-- <section> -->
+        <!--   <h2>make a <a href="https://hub.docker.com/account/signup/">Dockerhub</a> account</h2> -->
+        <!--   <h3>you can use your Github credentials</h3> -->
+        <!-- </section> -->
+        <!--  -->
+        <!-- <section> -->
+        <!--   <h2>make a <a onclick="login()">Done</a> session</h2> -->
+        <!--   <h3>you can use your Github credentials</h3> -->
+        <!-- </section> -->
+        <!--  -->
 
         <section>
           <h2>What is docker?</h2>
@@ -159,7 +156,7 @@ if( window.location.search.match( /print-pdf/gi ) ) {
         <section>
           <h2>Docker is not...</h2>
           <ul>
-            <li class="fragment">a Virtual Machine</li>
+            <li class="fragment">A Hypervisor</li>
             <li class="fragment">an Automated Deployment System</li>
           </ul>
           <aside class="notes">
@@ -169,78 +166,55 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
         <section>
           <h2 style="position: relative; bottom: 200px;">vocab</h2>
-        <section>
-          <aside class="notes">
-            make sure to ask about each thing
-          </aside>
-        </section>
 
-        <section>
-          <h2>Docker Server:</h2> The daemon that manages containers and images
-        </section>
+          <section>
+            <aside class="notes">
+              make sure to ask about each thing
+            </aside>
+          </section>
 
-        <section>
-          <h2>Docker CLI:</h2> The docker command
-        </section>
+          <section>
+            <h2>Docker Server:</h2> The daemon that manages containers and images
+          </section>
 
-        <section>
+          <section>
+            <h2>Docker CLI:</h2> The docker command
+          </section>
+
+          <section>
             <h2>Docker Hub:</h2> The docker image hosting service
-        </section>
+          </section>
 
-        <section>
+          <section>
             <h2>Image:</h2> A read only file system
-        </section>
+          </section>
 
-        <section>
-              <h2>Base Image:</h2> An image without a parent
-        </section>
+          <section>
+            <h2>Base Image:</h2> An image without a parent
+          </section>
 
-        <section>
-                <h2>Container:</h2> An instance of a Image
-        </section>
+          <section>
+            <h2>Container:</h2> An instance of a Image
+          </section>
 
-        <section>
-                <h2>Repository:</h2> a set of images
-        </section>
+          <section>
+            <h2>Repository:</h2> a set of images
+          </section>
 
-        <section>
-                <h2>Registry:</h2> a place the images are hosted(dockerhub)
-        </section>
+          <section>
+            <h2>Registry:</h2> a place the images are hosted(dockerhub)
+          </section>
 
         </section>
         <!-- Example of nested vertical slides -->
         <section>
           <h2 style="position: relative; bottom: 430px;">Lab 1</h2> <a class="done-button" onclick="completeLab(1)">I'm Done</a>
           <section>
-            <h3>install docker</h3>
+            <h3>get into your docker image</h3>
           </section>
 
           <section>
-            <h2>Ubuntu 14.04/Debian</h2>
-            <p>Take a look <a href ="http://docs.docker.com/installation/ubuntulinux/">here</a>
-            Or if you are lazy this is it summarized</p>
-            <pre><code data-trim contenteditable>
-curl -sSL https://get.docker.com/ubuntu/ | sudo sh
-sudo usermod -a -G docker $USER
-# you may need to re-login
-docker pull ubuntu
-            </code></pre>
-            <h2>Arch</h2>
-            <pre><code data-trim contenteditable>
-sudo pacman -S install docker
-sudo usermod -a -G docker $USER
-# you may need to re-login
-docker pull ubuntu
-            </code></pre>
-            <h2>Windows/OSX</h2>
-            <p>
-            potentially use <a href="https://github.com/boot2docker/boot2docker">boot2docker</a> but for this class I have a Virtual Box appliance for any one who wants it
-            </p>
-            <h2>Unlisted</h2>
-            <p>
-            look <a href="http://docs.docker.com/installation/">here</a> for install instructions or use the aforementioned Virtual Box appliance
-            </p>
-
+      TODO: this slide
           </section>
         </section>
 
