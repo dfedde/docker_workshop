@@ -290,16 +290,15 @@ Start nginx
 </section> 
 <section data-markdown>
   <script type="text/template">
-    <h2 style="position: relative; bottom: 430px;">Lab 4</h2> <a class="done-button" onclick="completeLab(4)">I'm Done</a>
-
-<section>
+    <section>
 <h3>the one where you make a new image</h3>
 </section>
 
 <section>
 <h2>commit your container</h2>
+
 <pre><code data-trim contenteditable>
-# in your container
+# in the container
 echo "daemon off;" >> /etc/nginx/nginx.conf
 exit
 # out of the docker
@@ -312,41 +311,58 @@ docker ps
 
 <section>
 <h2>what did we just do?</h2>
-<ul>
-<li class="fragment">
-name of the image
-<pre class="fragment"><code data-trim contenteditable>
-yourname/dockerclass
-</code></pre>
 
-</li>
-<li class="fragment">
-bind all of the containers ports to a random high port on the host
-<pre class="fragment"><code data-trim contenteditable>
-docker run -P
-</code></pre>
+<pre>
+<span data-fragment-index=1 class="fragment highlight-current-green">echo "daemon off;" >> /etc/nginx/nginx.conf</span>
+<span data-fragment-index=2 class="fragment highlight-current-green">exit</span>
 
-</li>
-<li class="fragment">
-daemonize the container
-<pre class="fragment"><code data-trim contenteditable>
-docker run -d
-</code></pre>
+<span data-fragment-index=3 class="fragment highlight-current-green">docker ps -l</span>
+<span data-fragment-index=5 class="fragment highlight-current-green">docker commit</span> $(docker ps -l <span data-fragment-index=4 class="fragment highlight-current-green">-q</span>) yourname/dockerclass
+<span data-fragment-index=7 class="fragment highlight-current-green">docker run <span data-fragment-index=8 class="fragment highlight-current-green">-d</span> -p 80:80 yourname/dockerclass service nginx start</span>
+docker ps
+</pre>
 
-</li>
-<li class="fragment">
-start the nginx service
-<pre class="fragment"><code data-trim contenteditable>
-service nginx start
-</code></pre>
-</li>
-<li class="fragment">
-only return the name of the container
-<pre class="fragment"><code data-trim contenteditable>
-docker ps -q
-</code></pre>
-</li>
-</ul>
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=1>
+make sure that nginx runs in the forground
+</p>
+</div>
+ 
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=2>
+get out of thse container
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=3>
+show the latest created contaier
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=4>
+only print the sha of the image (quiet mode)
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=5>
+commit an continer to make it into a image
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=7>
+run your newly created images
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=8>
+Start the container in the background
+</p>
+</div>
 </section>
 
 <section>
@@ -360,13 +376,12 @@ docker ps -q
 </section> 
 <section data-markdown>
   <script type="text/template">
-    <h2 style="position: relative; bottom: 430px;">Lab 5</h2> <a class="done-button" onclick="completeLab(5)">I'm Done</a>
-<section>
+    <section>
 <h3>tagging a image</h3>
 </section>
 
 <section>
-<h2>stop your container</h2>
+<h2>Tag your image</h2>
 <pre><code data-trim contenteditable>
 docker images
 docker tag  name_of_image yourname/dockerclass:byhand
@@ -375,26 +390,34 @@ docker tag  name_of_image yourname/dockerclass:byhand
 
 <section>
 <h2>what did we just do?</h2>
-<ul>
-<li class="fragment">
-add a tag to a docker image
-<pre class="fragment"><code data-trim contenteditable>
-docker tag
-</code></pre>
-</li>
-<li class="fragment">
-add the byhand tag to the yourname/dockerclass image
-<pre class="fragment"><code data-trim contenteditable>
-yourname/dockerclass:byhand
-</code></pre>
-</li>
-<li class="fragment">
-list all the images on a machine
-<pre class="fragment"><code data-trim contenteditable>
-docker images
-</code></pre>
-</li>
-</ul>
+<pre>
+<span data-fragment-index=1 class="fragment highlight-current-green">docker images</span>
+<span data-fragment-index=2 class="fragment highlight-current-green">docker tag</span> <span data-fragment-index=3 class="fragment highlight-current-green">name_of_image</span> <span data-fragment-index=4 class="fragment highlight-current-green">yourname/dockerclass:byhand</span>
+</pre>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=1>
+list all the images on your box
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=2>
+docker image tag command
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=3>
+The name of the image
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=4>
+the final name of the image
+</p>
+</div>
 </section>
 
 <section>
@@ -406,8 +429,7 @@ docker images
 </section> 
 <section data-markdown>
   <script type="text/template">
-    <h2 style="position: relative; bottom: 430px;">Lab 6</h2> <a class="done-button" onclick="completeLab(6)">I'm Done</a>
-<section>
+    <section>
 <h3>add this presentation to the container</h3>
 </section>
 
@@ -495,133 +517,50 @@ docker ps -a
 </section> 
 <section data-markdown>
   <script type="text/template">
-    <h2 style="position: relative; bottom: 430px;">Lab 7</h2> <a class="done-button" onclick="completeLab(7)">I'm Done</a>
-
-<section>
+    <section>
 <h3>Stopping and removing a container</h3>
 </section>
 
 <section>
 <h2>stop your container</h2>
 <pre><code data-trim contenteditable>
-docker stop `docker ps -lq`
 docker ps -a
-docker rm  container name
+docker stop $(docker ps -lq)
+docker rm  container_name
 </code></pre>
 </section>
 
 <section>
 <h2>what did we just do?</h2>
-<ul>
-<li class="fragment">
-stops 1 or more given containers
-<pre class="fragment"><code data-trim contenteditable>
-docker stop
-</code></pre>
-</li>
-<li class="fragment">
-removes 1 or more given container
-<pre class="fragment"><code data-trim contenteditable>
-docker rm
-</code></pre>
-</li>
-<li class="fragment">
-return all the containers
-<pre class="fragment"><code data-trim contenteditable>
-docker ps -a
-</code></pre>
-</li>
-</ul>
+
+<pre>
+docker ps <span data-fragment-index=1 class="fragment highlight-current-green">-a</span>
+<span data-fragment-index=2 class="fragment highlight-current-green">docker stop</span> $(docker ps -lq)
+<span data-fragment-index=3 class="fragment highlight-current-green">docker rm</span> container_name
+</pre>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=1>
+list all containers even ones that are not currently running
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=2>
+stop one or more running contanier
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=3>
+remove one or more images
+</p>
+</div>
+
 </section>
 
 <section>
 <h2 class="fragment">I want to share my awesome new image</h2>
-</section>
-
-  </script>
-</section> 
-<section data-markdown>
-  <script type="text/template">
-    <h2 style="position: relative; bottom: 430px;">Lab 8</h2>
-
-<section>
-<h3>docker hub</h3>
-</section>
-
-<section>
-<h2>push your image to docker hub</h2>
-<p>create a<a href ="https://hub.docker.com/account/signup/docker"> dockerhub account</a></p>
-<pre><code data-trim contenteditable>
-docker login
-docker push yourname/dockerclass
-</code></pre>
-</section>
-
-<section>
-<h2>what did we just do?</h2>
-<ul>
-<li class="fragment">
-login to the registry (default docker hub)
-<pre class="fragment"><code data-trim contenteditable>
-docker login
-</code></pre>
-</li>
-<li class="fragment">
-push the image to the registry
-<pre class="fragment"><code data-trim contenteditable>
-docker push yourname/dockerclass
-</code></pre>
-</li>
-</ul>
-</section>
-
-<section>
-<h2>now lets get that on the server</h2>
-</section>
-
-  </script>
-</section> 
-<section data-markdown>
-  <script type="text/template">
-    <h2 style="position: relative; bottom: 430px;">Lab 9</h2>
-
-<section>
-<h3>your first deploy</h3>
-</section>
-
-<section>
-<h2>deploy to your server</h2>
-<pre><code data-trim contenteditable>
-ssh sfsstudent@ip_Duncan_gave_you
-# password is sfsrocks
-docker login #if you made your repo private
-docker pull yourname/dockerclass
-docker run -p 80:80 -d  yourname/dockerclass nginx
-# test your new server
-exit
-</code></pre>
-</section>
-
-<section>
-<h2>what did we just do?</h2>
-<ul>
-<li class="fragment">
-pull the image back down
-<pre class="fragment"><code data-trim contenteditable>
-docker pull yourname/dockerclass
-</code></pre>
-</li>
-<li class="fragment">
-run the container
-<pre class="fragment"><code data-trim contenteditable>
-docker run -p 80:80 -d  yourname/dockerclass
-</code></pre>
-</li>
-</ul>
-</section>
-
-<section>
-<h2>but there is a better way to make images</h2>
 </section>
 
   </script>
@@ -683,15 +622,12 @@ touch Dockerfile
 </section> 
 <section data-markdown>
   <script type="text/template">
-    <h2 style="position: relative; bottom: 430px;">Lab 11</h2>
-
-<section>
+    <section>
 <h3>the docker file</h3>
 </section>
 
 <section>
 <h2>build your image with a docker file</h2>
-<h3><a href="https://gist.github.com/6b834c64ecfdf9b3974e">Dockerfile</a></h3>
 <pre><code data-trim contenteditable>
 FROM ubuntu:14.10
 
@@ -707,7 +643,8 @@ CMD ["nginx"]
 EXPOSE 80
 </code></pre>
 
-<pre><code data-trim contenteditable>
+</section>
+
 # create a Dockerfile
 docker build -t yourname/dockerclass .
 docker run -p 80:80 -d yourname/dockerclass
