@@ -25,7 +25,7 @@ docker run <span data-fragment-index=1 class="fragment highlight-current-green">
 
 <div style='position: absolute;'>
 <p class="fragment fade-in-then-out" data-fragment-index=1>
-forward the containers port 80 to the hosts port 80
+forward the host's port 80 to the container's port 80
 </p>
 </div>
 
