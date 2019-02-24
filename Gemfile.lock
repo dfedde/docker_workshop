@@ -1,0 +1,17 @@
+PATH
+  remote: ../../workspace/classanator
+  specs:
+    classanator (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  classanator!
+
+BUNDLED WITH
+   1.16.1

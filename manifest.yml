@@ -1,0 +1,43 @@
+#TODO: remove done
+#TODO: updagte the what did we just do sec
+Title: this is the class title
+slides:
+  - file: title.md #TODO: find a new joke
+  - file: intro.md #TODO: make a little more simple
+  - file: what_is_docker.md 
+  - file: vocab.md # ✔️
+  - file: get_setup.md #TODO: decide how the user will use GCP
+  - file: hello_docker.md # ✔️
+  - file: manual_nginx.md # ✔️
+
+  - file: imagevscontainer.md 
+
+  - file: commit_an_image.md #TODO: make a less contrived segway
+  - file: tagging_an_image.md
+  - file: adding_slide_files.md #TODO: fix how the fies get into the image
+
+  - file: lookatrunningcontainers.md
+  - file: push_to_dockerhub.md
+
+  - file: deploy_handmade.md
+
+  - file: pull_slide_code.md
+  - file: make_a_dockerfile.md
+  - file: copy_code_into_image.md
+  - file: volumes.md
+  - file: unnamed_volumes.md
+  - file: datacontainer.md
+  - file: actioncontainer.md
+  - file: finaldeploy.md
+
+
+# - goal: describe who we are
+#   file: intoductions.md
+#
+# - file: sample_lab.md
+#   ref: sample_lab
+#   test: '[ 0 -eq 0 ]'
+
+# - file: sample_second_lab.md
+#   given: sample_lab
+#   test: '[ 0 -eq 0 ]' 
