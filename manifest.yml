@@ -10,25 +10,27 @@ slides:
   - file: hello_docker.md # ✔️
   - file: manual_nginx.md # ✔️
 
-  - file: imagevscontainer.md 
+  - file: imagevscontainer.md # ✔️
 
-  - file: commit_an_image.md #TODO: make a less contrived segway
-  - file: tagging_an_image.md
-  - file: adding_slide_files.md #TODO: fix how the fies get into the image
+  - file: commit_an_image.md # ✔️ 
+    #TODO: add a slide to explain image name format
+  - file: tagging_an_image.md # ✔️
+  - file: adding_slide_files.md #TODO: fix how the fies get into the image should be a github release
 
-  - file: lookatrunningcontainers.md
-  - file: push_to_dockerhub.md
+  - file: lookatrunningcontainers.md # ✔️
 
-  - file: deploy_handmade.md
+    #- file: push_to_dockerhub.md
 
-  - file: pull_slide_code.md
+    #- file: deploy_handmade.md
+
+  - file: pull_slide_code.md #TODO: fix how the fies get into the image saem github release
   - file: make_a_dockerfile.md
   - file: copy_code_into_image.md
   - file: volumes.md
   - file: unnamed_volumes.md
   - file: datacontainer.md
   - file: actioncontainer.md
-  - file: finaldeploy.md
+    #  - file: finaldeploy.md
 
 
 # - goal: describe who we are

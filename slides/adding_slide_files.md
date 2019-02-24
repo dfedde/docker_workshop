@@ -1,4 +1,3 @@
-<h2 style="position: relative; bottom: 430px;">Lab 6</h2> <a class="done-button" onclick="completeLab(6)">I'm Done</a>
 <section>
 <h3>add this presentation to the container</h3>
 </section>

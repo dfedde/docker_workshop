@@ -1,12 +1,9 @@
-<h2 style="position: relative; bottom: 430px;">Lab 11</h2>
-
 <section>
 <h3>the docker file</h3>
 </section>
 
 <section>
 <h2>build your image with a docker file</h2>
-<h3><a href="https://gist.github.com/6b834c64ecfdf9b3974e">Dockerfile</a></h3>
 <pre><code data-trim contenteditable>
 FROM ubuntu:14.10
 
@@ -32,45 +29,46 @@ docker run -p 80:80 -d yourname/dockerclass
 
 <section>
 <h2>what did we just do?</h2>
-<ul>
-<li class="fragment">
-build the new image from ubuntu 14.10
-<pre><code data-trim contenteditable>
-FROM ubuntu:14.10
-</code></pre>
-</li>
-<li class="fragment">
-run these commands on the new container
-<pre><code data-trim contenteditable>
-RUN \
+<pre>
+<span data-fragment-index=1 class="fragment highlight-current-green">FROM ubuntu:14.10</span>
+
+<span data-fragment-index=2 class="fragment highlight-current-green">RUN \
 apt-get update && \
 apt-get install -y nginx && \
 rm -rf /var/lib/apt/lists/* && \
 echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
-chown -R www-data:www-data /var/lib/nginx
-</code></pre>
-</li>
-<li class="fragment">
-run the nginx comand when you run the image
-<pre><code data-trim contenteditable>
-CMD ["nginx"]
-</code></pre>
-</li>
-<li class="fragment">
-expose port 80 to the host(the host must still bind this to a port)
-<pre><code data-trim contenteditable>
-EXPOSE 80
-</code></pre>
-</li>
-<li class="fragment">
-build the image from the docker file
-<pre><code data-trim contenteditable>
-docker build -t yourname/dockerclass .
-</code></pre>
-</li>
-</ul>
+chown -R www-data:www-data /var/lib/nginx</span>
+
+<span data-fragment-index=3 class="fragment highlight-current-green">CMD ["nginx"]</span>
+
+<span data-fragment-index=4 class="fragment highlight-current-green">EXPOSE 80</span>
+</pre>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=1>
+The image that this new image will be made from
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=2>
+Run this stuff in the container (same commands we ran before)
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=3>
+The default command to run when the image is run
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=4>
+Tell docker port 80 will have somthing on it. 
+</p>
+</div>
 </section>
 
 <section>
-<h2>now we can build a image on the fly but how do we get our data in there</h2>
+<h2>Do I realy have to do the install, hasn't anyone already done this </h2>
 </section>

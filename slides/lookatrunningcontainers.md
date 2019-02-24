@@ -1,5 +1,3 @@
-<h2 style="position: relative; bottom: 430px;">Lab 7</h2> <a class="done-button" onclick="completeLab(7)">I'm Done</a>
-
 <section>
 <h3>Stopping and removing a container</h3>
 </section>
@@ -7,34 +5,39 @@
 <section>
 <h2>stop your container</h2>
 <pre><code data-trim contenteditable>
-docker stop `docker ps -lq`
 docker ps -a
-docker rm  container name
+docker stop $(docker ps -lq)
+docker rm  container_name
 </code></pre>
 </section>
 
 <section>
 <h2>what did we just do?</h2>
-<ul>
-<li class="fragment">
-stops 1 or more given containers
-<pre class="fragment"><code data-trim contenteditable>
-docker stop
-</code></pre>
-</li>
-<li class="fragment">
-removes 1 or more given container
-<pre class="fragment"><code data-trim contenteditable>
-docker rm
-</code></pre>
-</li>
-<li class="fragment">
-return all the containers
-<pre class="fragment"><code data-trim contenteditable>
-docker ps -a
-</code></pre>
-</li>
-</ul>
+
+<pre>
+docker ps <span data-fragment-index=1 class="fragment highlight-current-green">-a</span>
+<span data-fragment-index=2 class="fragment highlight-current-green">docker stop</span> $(docker ps -lq)
+<span data-fragment-index=3 class="fragment highlight-current-green">docker rm</span> container_name
+</pre>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=1>
+list all containers even ones that are not currently running
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=2>
+stop one or more running contanier
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=3>
+remove one or more images
+</p>
+</div>
+
 </section>
 
 <section>
