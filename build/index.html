@@ -1,0 +1,1103 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>title</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+        <section data-markdown>
+  <script type="text/template">
+    <section>
+  <image style="border:none;" src="http://upload.wikimedia.org/wikipedia/commons/7/79/Docker_%28container_engine%29_logo.png">
+  <div class="fragment">
+  <h1>Not</h1>
+  <image style="border:none;" src="http://www.pantalones.net/files/2011/03/logo-dockers.jpg">
+  </div>
+  <p>
+  <small>Created by <a href="http://duncan.fedde.us">Duncan Fedde</a> / <a href="http://twitter.com/dfedde">@dfedde</a></small>
+  </p>
+  <aside class="notes">
+  Goals for this presentation:
+  <ul>
+  <li>make a image by hand</li>
+  <li>make a image by dockerfile</li>
+  <li>start an image</li>
+  <li>handle data in a container</li>
+  <li>handle port forwarding</li>
+  <li>handle sharing data between containers</li>
+  <li>provide a sample way to deploy docker on a server</li>
+  </ul>
+  start out by asking about background in linux, containers
+  </aside>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    ## What will we be doing Today?
+
+- make a image by hand
+- make a image by dockerfile
+- start an image
+- handle data in a container
+- handle port forwarding
+- handle sharing data between containers
+- provide a sample way to deploy docker on a server
+
+
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h1>What is docker?</h1>
+
+<div data-fragment-index=0 class="fragment" style='position: absolute;'>
+<div data-fragment-index=4 class="fragment fade-out">
+<h2>Docker is...</h2>
+<ul>
+<li data-fragment-index=1 class="fragment">Portable</li>
+<li data-fragment-index=2 class="fragment">Lightweight</li>
+<li data-fragment-index=3 class="fragment">Application Containers</li>
+</ul>
+<aside class="notes">
+make sure to ask about each thing
+</aside>
+</div>
+</div>
+
+<div data-fragment-index=4 class="fragment" style='position: absolute;'>
+<h2>Docker is not...</h2>
+<ul>
+<li data-fragment-index=5 class="fragment">A Hypervisor</li>
+<li data-fragment-index=6 class="fragment">An Automated Deployment System</li>
+</ul>
+<aside class="notes">
+make sure to ask about each thing
+</aside>
+</div>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    
+<section>
+<h2>vocab</h2>
+</section>
+
+<section>
+<h2>Docker Server:</h2> The daemon that manages containers and images
+</section>
+
+<section>
+<h2>Docker CLI:</h2> The docker command
+</section>
+
+<section>
+<h2>Docker Hub:</h2> The docker image hosting service
+</section>
+
+<section>
+<h2>Image:</h2> A read only file system
+</section>
+
+<section>
+<h2>Base Image:</h2> An image without a parent
+</section>
+
+<section>
+<h2>Container:</h2> An instance of a Image
+</section>
+
+<section>
+<h2>Repository:</h2> a set of images
+</section>
+
+<section>
+<h2>Registry:</h2> a place the images are hosted (dockerhub)
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <section>
+<h2 style="position: relative; bottom: 430px;">Lab 1</h2> <a class="done-button" onclick="completeLab(1)">I'm Done</a>
+<section>
+<h3>get into your docker image</h3>
+</section>
+
+<section>
+TODO: this slide
+</section>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <section>
+<h3>Hello Docker</h3>
+</section>
+
+<section>
+<h2>Run echo in a container</h2>
+<pre><code data-trim contenteditable>
+docker run ubuntu /bin/echo "Hello Docker"
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+
+<pre>
+<span class="fragment highlight-current-green" data-fragment-index=1>docker run</span> <span data-fragment-index=2 class="fragment highlight-current-green">ubuntu</span> <span data-fragment-index=3 class="fragment highlight-current-green">/bin/echo "Hello Docker"</span>
+</pre>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=1>
+The run command
+</p>
+</div>
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=2>
+The Image To Run
+</p>
+</div>
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=3>
+The command to run in the new container
+</p>
+</div>
+</section>
+
+<section>
+<h2>great but can we do something useful?</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <section>
+<h3>Adding a Web Server</h3>
+</section>
+
+<section>
+<h2>Run an Interactive container</h2>
+<pre><code data-trim contenteditable>
+docker run -p 80:80 -i -t ubuntu /bin/bash
+# in the container
+apt-get update
+apt-get install nginx
+service nginx start
+# go look at your fancy new web site
+#  in a browser at localhost:80
+# don't exit the container
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+
+<pre>
+docker run <span data-fragment-index=1 class="fragment highlight-current-green">-p 80:80</span> <span data-fragment-index=2 class="fragment highlight-current-green">-i</span> <span data-fragment-index=3 class="fragment highlight-current-green">-t</span> <span>ubuntu</span> <span data-fragment-index=4 class="fragment highlight-current-green">/bin/bash</span>
+</pre>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=1>
+forward the containers port 80 to the hosts port 80
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=2>
+keep STDIN open (interactive mode)
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=3>
+allocate a pseudo TTY
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=4>
+run bash in the container
+</p>
+</div>
+
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+
+<pre>
+<span data-fragment-index=1 class="fragment highlight-current-green">apt-get update
+apt-get install nginx</span>
+<span data-fragment-index=2 class="fragment highlight-current-green">service nginx start</span>
+</pre>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=1>
+Install nginx
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=2>
+Start nginx
+</p>
+</div>
+
+</section>
+
+<section>
+<h2>well that works but do I need to to that every time?</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+      <section>
+  <image src="assets/images.png">
+  </section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 4</h2> <a class="done-button" onclick="completeLab(4)">I'm Done</a>
+
+<section>
+<h3>the one where you make a new image</h3>
+</section>
+
+<section>
+<h2>commit your container</h2>
+<pre><code data-trim contenteditable>
+# in your container
+echo "daemon off;" >> /etc/nginx/nginx.conf
+exit
+# out of the docker
+docker ps -l
+docker commit `docker ps -lq` yourname/dockerclass
+docker run -d -P yourname/dockerclass service nginx start
+docker ps
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+name of the image
+<pre class="fragment"><code data-trim contenteditable>
+yourname/dockerclass
+</code></pre>
+
+</li>
+<li class="fragment">
+bind all of the containers ports to a random high port on the host
+<pre class="fragment"><code data-trim contenteditable>
+docker run -P
+</code></pre>
+
+</li>
+<li class="fragment">
+daemonize the container
+<pre class="fragment"><code data-trim contenteditable>
+docker run -d
+</code></pre>
+
+</li>
+<li class="fragment">
+start the nginx service
+<pre class="fragment"><code data-trim contenteditable>
+service nginx start
+</code></pre>
+</li>
+<li class="fragment">
+only return the name of the container
+<pre class="fragment"><code data-trim contenteditable>
+docker ps -q
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>cool!</h2>
+<h2 class="fragment">I can have a image of nginx</h2>
+<h2 class="fragment">but how can I keep versions of my images</h2>
+</section>
+
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 5</h2> <a class="done-button" onclick="completeLab(5)">I'm Done</a>
+<section>
+<h3>tagging a image</h3>
+</section>
+
+<section>
+<h2>stop your container</h2>
+<pre><code data-trim contenteditable>
+docker images
+docker tag  name_of_image yourname/dockerclass:byhand
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+add a tag to a docker image
+<pre class="fragment"><code data-trim contenteditable>
+docker tag
+</code></pre>
+</li>
+<li class="fragment">
+add the byhand tag to the yourname/dockerclass image
+<pre class="fragment"><code data-trim contenteditable>
+yourname/dockerclass:byhand
+</code></pre>
+</li>
+<li class="fragment">
+list all the images on a machine
+<pre class="fragment"><code data-trim contenteditable>
+docker images
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>cool!</h2>
+<h2 class="fragment">but how can I host my files</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 6</h2> <a class="done-button" onclick="completeLab(6)">I'm Done</a>
+<section>
+<h3>add this presentation to the container</h3>
+</section>
+
+<section>
+<h2>add these files to your container</h2>
+<pre><code data-trim contenteditable>
+docker run -i -t -p 80:80 yourname/dockerclass:byhand /bin/bash
+# in the container
+apt-get install git
+git clone https://github.com/dfedde/docker_workshop.git /var/www
+cd /var/www
+cp Sitefile /etc/nginx/sites-enabled/
+rm /etc/nginx/sites-enabled/default
+nginx
+#look at your new site in the browser
+exit
+docker ps -l
+# get the name from of the container
+docker commit `docker ps -lq` yourname/dockerclass
+docker run -d -P yourname/dockerclass service nginx start
+#look at your new site in the browser
+docker images
+docker tag imagesname yourname/dockerclass:byhand
+docker ps -l
+</code></pre>
+</section>
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+we used and committed the dockerclass repository
+<pre class="fragment"><code data-trim contenteditable>
+yourname/dockerclass
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>lets look at all the containers we have piling up</h2>
+</section>
+
+<section>
+<h2 style="position: relative; bottom: 430px;">Lab 7</h2> <a class="done-button" onclick="completeLab(7)">I'm Done</a>
+<section>
+<h3>Stopping and removing a container</h3>
+</section>
+
+<section>
+<h2>stop your container</h2>
+<pre><code data-trim contenteditable>
+docker stop `docker ps -lq`
+docker ps -a
+docker rm  container name
+</code></pre>
+</section>
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+stops 1 or more given containers
+<pre class="fragment"><code data-trim contenteditable>
+docker stop
+</code></pre>
+</li>
+<li class="fragment">
+removes 1 or more given container
+<pre class="fragment"><code data-trim contenteditable>
+docker rm
+</code></pre>
+</li>
+<li class="fragment">
+return all the containers
+<pre class="fragment"><code data-trim contenteditable>
+docker ps -a
+</code></pre>
+</li>
+</ul>
+</section>
+<section>
+<h2 class="fragment">I want to share my awesome new image</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 7</h2> <a class="done-button" onclick="completeLab(7)">I'm Done</a>
+
+<section>
+<h3>Stopping and removing a container</h3>
+</section>
+
+<section>
+<h2>stop your container</h2>
+<pre><code data-trim contenteditable>
+docker stop `docker ps -lq`
+docker ps -a
+docker rm  container name
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+stops 1 or more given containers
+<pre class="fragment"><code data-trim contenteditable>
+docker stop
+</code></pre>
+</li>
+<li class="fragment">
+removes 1 or more given container
+<pre class="fragment"><code data-trim contenteditable>
+docker rm
+</code></pre>
+</li>
+<li class="fragment">
+return all the containers
+<pre class="fragment"><code data-trim contenteditable>
+docker ps -a
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2 class="fragment">I want to share my awesome new image</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 8</h2>
+
+<section>
+<h3>docker hub</h3>
+</section>
+
+<section>
+<h2>push your image to docker hub</h2>
+<p>create a<a href ="https://hub.docker.com/account/signup/docker"> dockerhub account</a></p>
+<pre><code data-trim contenteditable>
+docker login
+docker push yourname/dockerclass
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+login to the registry (default docker hub)
+<pre class="fragment"><code data-trim contenteditable>
+docker login
+</code></pre>
+</li>
+<li class="fragment">
+push the image to the registry
+<pre class="fragment"><code data-trim contenteditable>
+docker push yourname/dockerclass
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>now lets get that on the server</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 9</h2>
+
+<section>
+<h3>your first deploy</h3>
+</section>
+
+<section>
+<h2>deploy to your server</h2>
+<pre><code data-trim contenteditable>
+ssh sfsstudent@ip_Duncan_gave_you
+# password is sfsrocks
+docker login #if you made your repo private
+docker pull yourname/dockerclass
+docker run -p 80:80 -d  yourname/dockerclass nginx
+# test your new server
+exit
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+pull the image back down
+<pre class="fragment"><code data-trim contenteditable>
+docker pull yourname/dockerclass
+</code></pre>
+</li>
+<li class="fragment">
+run the container
+<pre class="fragment"><code data-trim contenteditable>
+docker run -p 80:80 -d  yourname/dockerclass
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>but there is a better way to make images</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 10</h2>
+
+<section>
+<h3>forking the repo</h3>
+</section>
+
+<section>
+<h2>fork and prep my github repo</h2>
+<h3><a href="https://github.com/dfedde/docker_workshop"> the repo</a></h3>
+<ul>
+<li> go over to my repository click the<a href="https://github.com/dfedde/docker_workshop/fork"> fork </a>button</li>
+<li> go to your new repository select the Dockerfile file</li>
+<li> select the trashcan button</li>
+<li> select the commit changes button at the bottom of the page</li>
+<li> now run these commands</li>
+</ul>
+<pre><code data-trim contenteditable>
+git clone http://the.address.of/your/repo docker_workshop
+cd docker_workshop
+touch Dockerfile
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+make a copy of my repo under your namespace
+</li>
+<li class="fragment">
+removed my docker file
+</li>
+<li class="fragment">
+clone your repo
+<pre><code data-trim contenteditable>
+git clone http://the.address.of/your/repo docker_workshop
+</code></pre>
+</li>
+<li class="fragment">
+make a new empty docker file
+<pre><code data-trim contenteditable>
+touch Dockerfile
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>what do I put in this new file?</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 11</h2>
+
+<section>
+<h3>the docker file</h3>
+</section>
+
+<section>
+<h2>build your image with a docker file</h2>
+<h3><a href="https://gist.github.com/6b834c64ecfdf9b3974e">Dockerfile</a></h3>
+<pre><code data-trim contenteditable>
+FROM ubuntu:14.10
+
+RUN \
+apt-get update && \
+apt-get install -y nginx && \
+rm -rf /var/lib/apt/lists/* && \
+echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+chown -R www-data:www-data /var/lib/nginx
+
+CMD ["nginx"]
+
+EXPOSE 80
+</code></pre>
+
+<pre><code data-trim contenteditable>
+# create a Dockerfile
+docker build -t yourname/dockerclass .
+docker run -p 80:80 -d yourname/dockerclass
+# go checkout your web site http://localhost
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+build the new image from ubuntu 14.10
+<pre><code data-trim contenteditable>
+FROM ubuntu:14.10
+</code></pre>
+</li>
+<li class="fragment">
+run these commands on the new container
+<pre><code data-trim contenteditable>
+RUN \
+apt-get update && \
+apt-get install -y nginx && \
+rm -rf /var/lib/apt/lists/* && \
+echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+chown -R www-data:www-data /var/lib/nginx
+</code></pre>
+</li>
+<li class="fragment">
+run the nginx comand when you run the image
+<pre><code data-trim contenteditable>
+CMD ["nginx"]
+</code></pre>
+</li>
+<li class="fragment">
+expose port 80 to the host(the host must still bind this to a port)
+<pre><code data-trim contenteditable>
+EXPOSE 80
+</code></pre>
+</li>
+<li class="fragment">
+build the image from the docker file
+<pre><code data-trim contenteditable>
+docker build -t yourname/dockerclass .
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>now we can build a image on the fly but how do we get our data in there</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 12</h2> <a class="done-button" onclick="completeLab(12)">I'm Done</a>
+<section>
+<h3>copy that</h3>
+</section>
+
+<section>
+<h2>the copy command</h2>
+<pre><code data-trim contenteditable>
+FROM ubuntu:14.10
+
+RUN \
+apt-get update && \
+apt-get install -y nginx && \
+rm -rf /var/lib/apt/lists/* && \
+echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+chown -R www-data:www-data /var/lib/nginx
+
+RUN rm /etc/nginx/sites-enabled/default
+
+COPY Sitefile /etc/nginx/sites-enabled/
+COPY css/       /var/www/css
+COPY js/        /var/www/js
+COPY lib/       /var/www/lib
+COPY plugin/    /var/www/plugin
+COPY index.html /var/www/
+
+CMD ["nginx"]
+
+EXPOSE 80
+</code></pre>
+<pre><code data-trim contenteditable>
+# create a Dockerfile
+docker build -t yourname/dockerclass:byfile .
+docker run -p 80:80 -d yourname/dockerclass
+# go checkout your web site http://localhost
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+copy a file from the host to the image
+<pre><code data-trim contenteditable>
+COPY index.html /var/www/
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>this works but what if we don't want our code in the image</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 13</h2>
+
+<section>
+<h3>using volumes</h3>
+</section>
+
+<section>
+<h2>use a named volume</h2>
+<pre><code data-trim contenteditable>
+FROM ubuntu:14.10
+
+RUN \
+apt-get update && \
+apt-get install -y nginx && \
+rm -rf /var/lib/apt/lists/* && \
+echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+chown -R www-data:www-data /var/lib/nginx
+
+RUN rm /etc/nginx/sites-enabled/default
+
+COPY Sitefile /etc/nginx/sites-enabled/
+
+CMD ["nginx"]
+
+EXPOSE 80
+</code></pre>
+<pre><code data-trim contenteditable>
+# create a Dockerfile
+docker build -t yourname/dockerclass:byfile .
+docker run -d -p 80:80 -v $(pwd):/var/www yourname/dockerclass:byfile
+# go checkout your web site http://localhost
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+link the local directory in the container
+<pre><code data-trim contenteditable>
+-v $(pwd):/var/www yourname/dockerclass:byfile
+</code></pre>
+</li>
+<li class="fragment">
+volumes don't get deleted when you remove a container
+</li>
+</ul>
+</section>
+
+<section>
+<h2>but this relies on every host having the same file structure</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 14</h2>
+
+<section>
+<h3>using unnamed volumes</h3>
+</section>
+
+<section>
+<h2>use a unnamed volume</h2>
+<pre><code data-trim contenteditable>
+FROM ubuntu:14.10
+
+RUN \
+apt-get update && \
+apt-get install -y nginx && \
+rm -rf /var/lib/apt/lists/* && \
+echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+chown -R www-data:www-data /var/lib/nginx
+
+RUN rm /etc/nginx/sites-enabled/default
+
+VOLUME ["/var/www"]
+
+COPY Sitefile /etc/nginx/sites-enabled/
+
+CMD ["nginx"]
+
+EXPOSE 80
+</code></pre>
+<pre><code data-trim contenteditable>
+# create a Dockerfile
+docker build -t yourname/dockerclass:byfile .
+docker run -p 80:80 -d yourname/dockerclass:byfile
+# go checkout your web site http://localhost
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+link the directory on the local file system in to the container
+<pre><code data-trim contenteditable>
+VOLUME ["/var/www"]
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>but this means your code is not in the image</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 15</h2> 
+
+<section>
+<h3>data containers</h3>
+</section>
+
+<section>
+<h2>make a data container image</h2>
+<pre><code data-trim contenteditable>
+mkdir -p images/data
+cd images/data
+touch Dockerfile
+</code></pre>
+<pre><code data-trim contenteditable>
+FROM ubuntu:14.10
+
+RUN \
+apt-get update && \
+apt-get install -y git
+
+VOLUME ["/var/www"]
+
+CMD ["git", "clone", "http://the.address.of/your/repo", "/var/www"]
+
+</code></pre>
+<pre><code data-trim contenteditable>
+docker build -t yourname/wwwdata .
+docker run --name www_files yourname/wwwdata
+docker run --volumes-from www_files -p 80:80 -d yourname/dockerclass:byfile
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+<li class="fragment">
+provide a explicit name for a container
+<pre><code data-trim contenteditable>
+--name
+</code></pre>
+</li>
+<li class="fragment">
+share a volume between containers(even not running containers)
+<pre><code data-trim contenteditable>
+--volumes-from
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>makes the data container to smart</h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 16</h2>
+
+<section>
+<h3>action containers</h3>
+</section>
+
+<section>
+<h2>make an action container</h2>
+<pre><code data-trim contenteditable>
+cd ../..
+mkdr -p images/git-puller
+cd images/git-puller
+touch Dockerfile
+</code></pre>
+<pre><code data-trim contenteditable>
+FROM ubuntu:14.10
+
+RUN \
+apt-get update && \
+apt-get install -y git
+
+VOLUME ["/var/www"]
+
+ENTRYPOINT ["git", "clone" ]
+</code></pre>
+<pre><code data-trim contenteditable>
+docker build -t yourname/gitpuller .
+docker run --name www_files -v /var/www ubuntu
+docker run --volumes-from www_files yourname/gitpuller http://the.address.of/your/repo /var/www
+docker run --volumes-from www_files -p 80:80 -d yourname/dockerclass:byfile
+</code></pre>
+</section>
+<section>
+<h2>what did we just do?</h2>
+<ul>
+</li>
+<li class="fragment">
+the command that will be run via the run command
+<pre><code data-trim contenteditable>
+ENTRYPOINT ["git", "clone" ]
+</code></pre>
+</li>
+</ul>
+</section>
+
+<section>
+<h2></h2>
+</section>
+
+  </script>
+</section> 
+<section data-markdown>
+  <script type="text/template">
+    <h2 style="position: relative; bottom: 430px;">Lab 17</h2>
+
+<section>
+<h3>final deploy</h3>
+</section>
+
+<section>
+<h2>deploy code to the server again</h2>
+<pre><code data-trim contenteditable>
+docker push yourname/dockerclass:byfile
+docker push yourname/gitpuller
+
+ssh sfsstudent@ip_Duncan_gave_you
+# password is still sfsrocks
+
+docker login #if you made your repo private
+docker run -d --name www_files -v /var/www ubuntu
+docker run --volumes-from www_files yourname/gitpuller http://the.address.of/your/repo /var/www
+docker run --volumes-from www_files -p 80:80 -d yourname/dockerclass:byfile
+# test if everything is working
+
+exit
+</code></pre>
+</section>
+
+<section>
+<h2>what did we just do?</h2>
+<ul>
+</ul>
+</section>
+
+  </script>
+</section> 
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
