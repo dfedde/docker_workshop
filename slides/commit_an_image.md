@@ -44,7 +44,7 @@ get out of thse container
 
 <div style='position: absolute;'>
 <p class="fragment fade-in-then-out" data-fragment-index=3>
-show the latest created contaier
+show the latest created container
 </p>
 </div>
 
@@ -56,7 +56,7 @@ only print the sha of the image (quiet mode)
 
 <div style='position: absolute;'>
 <p class="fragment fade-in-then-out" data-fragment-index=5>
-commit an continer to make it into a image
+commit a container to make it into a image
 </p>
 </div>
 
