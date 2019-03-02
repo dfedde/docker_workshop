@@ -265,7 +265,7 @@ apt-get update
 apt-get install nginx
 nginx
 # go look at your fancy new web site
-#  in a browser at localhost:80
+#  in a browser at (givenIP):80
 # don't exit the container
 </code></pre>
 </section>
@@ -372,7 +372,7 @@ exit
 # out of the docker
 docker ps -l
 docker commit $(docker ps -lq) yourname/dockerclass
-docker run -d -p 80:80 yourname/dockerclass service nginx start
+docker run -d -p 80:80 yourname/dockerclass nginx
 docker ps
 ```
 
@@ -403,7 +403,7 @@ get out of thse container
 
 <div style='position: absolute;'>
 <p class="fragment fade-in-then-out" data-fragment-index=3>
-show the latest created contaier
+show the latest created container
 </p>
 </div>
 
@@ -415,7 +415,7 @@ only print the sha of the image (quiet mode)
 
 <div style='position: absolute;'>
 <p class="fragment fade-in-then-out" data-fragment-index=5>
-commit an continer to make it into a image
+commit a container to make it into a image
 </p>
 </div>
 
@@ -459,7 +459,8 @@ Start the container in the background
 <h2>Tag your image</h2>
 <pre><code data-trim contenteditable>
 docker images
-docker tag  name_of_image yourname/dockerclass:byhand
+docker tag  (name_of_image) yourname/dockerclass:byhand
+docker images
 </code></pre>
 </section>
 
@@ -647,18 +648,62 @@ nginx
 exit
 docker ps -l
 # get the name from of the container
-docker commit $(docker ps -lq) yourname/dockerclass
+docker commit $(docker ps -lq) yourname/dockerclass:byhand
 docker run -d -p 80:80 yourname/dockerclass nginx
 #look at your new site in the browser
-docker images
-docker tag imagesname yourname/dockerclass:byhand
-docker images 
 </code></pre>
 </section>
 
 <section>
-<h2>lets look at all the containers we have piling up</h2>
+<h2>but if we cant see the logs can we be sure its running?</h2>
 </section>
+
+  </script>
+</section> 
+<section data-markdown
+         data-separator="^
+
+
+"
+							 data-separator-vertical="^
+
+"
+							 data-separator-notes="^Note:"
+							 data-charset="iso-8859-15" >
+  <script type="text/template">
+    ### logs
+
+
+## look at the logs
+```
+docker ps
+docker logs -f $(docker ps -lq)
+docker stop $(docker ps -lq)
+```
+
+
+## what did we just do?
+<pre>
+docker ps
+<span data-fragment-index=1 class="fragment highlight-current-green">docker logs <span data-fragment-index=2 class="fragment highlight-current-green">-f</span> $(docker ps -lq)</span>
+</pre>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=1>
+show the logs of a running container
+</p>
+</div>
+
+<div style='position: absolute;'>
+<p class="fragment fade-in-then-out" data-fragment-index=2>
+ follow the logs (default is to just print them)
+</p>
+</div>
+
+
+## Yey, I could give this image to someone 
+## But do I really have to build it every time while I'm woking on these slides?
+<!-- .element: class="fragment" -->
 
   </script>
 </section> 
@@ -683,9 +728,15 @@ docker images
 wget "github.com/dfedde/docker_workshop/releases/download/1.0.1/docker-workshop.tar.gz"
 tar xvzf docker-workshop.tar.gz
 cd build
-ls build
+ls
 </code></pre>
 </section>
+
+
+## what did we just do?
+
+### pulled down all the image code
+### got a gt
 
 <section>
 <h2>what do I put in this new file?</h2>
@@ -710,7 +761,7 @@ ls build
 ## Make a docker file
 ```
 cat <<EOF > Dockerfile
-FROM ubuntu:14.10
+FROM ubuntu:16.04
 
 RUN \
 apt-get update && \
@@ -731,14 +782,14 @@ EOF
 ```
 # create a Dockerfile
 docker build -t yourname/dockerclass .
-docker run -p 80:80 -d yourname/dockerclass
-# go checkout your web site http://<givenIP>
+docker run -p 80:80 -i yourname/dockerclass
+# go checkout your web site http://(givenIP)
 ```
 
 
 ## what did we just do?
 <pre>
-<span data-fragment-index=1 class="fragment highlight-current-green">FROM ubuntu:14.10</span>
+<span data-fragment-index=1 class="fragment highlight-current-green">FROM ubuntu:16:04</span>
 
 <span data-fragment-index=2 class="fragment highlight-current-green">RUN \
 apt-get update && \
@@ -842,9 +893,9 @@ The image that this new image will be made from
 
 ## the copy command
 ```
-echo <<EOF > Dockerfile
+cat <<EOF > Dockerfile
 FROM nginx
-
+RUN rm -rf /usr/share/nginx/html
 COPY . /usr/share/nginx/html
 EOF
 ```
@@ -893,9 +944,10 @@ copy all the local files into the image
 
 # use your old docker file
 ```
-docker build -t yourname/dockerclass:byfile .
-docker run -d -p 80:80 -v $(pwd):/usr/share/nginx/html yourname/dockerclass:byfile
-# go checkout your web site http://localhost
+docker run -d -p 80:80 -v $(pwd):/usr/share/nginx/html yourname/dockerclass
+# go checkout your web site (GivenIP)
+echo "<h1>I can write a better presentation then you</h1>" > index.html
+# go checkout your web site (GivenIP)
 ```
 
 
