@@ -68,7 +68,7 @@
 ```
 10 I'll run a lab
 20 try the lab on your own
-30 we'll come back and discus the lab
+30 we'll come back and discuss the lab
 40 GOTO 10
 ```
 <!-- .element: class="fragment" -->
@@ -700,10 +700,32 @@ show the logs of a running container
 </p>
 </div>
 
+  </script>
+</section> 
+<section data-markdown
+         data-separator="^
 
-## Yey, I could give this image to someone 
-## But do I really have to build it every time while I'm woking on these slides?
-<!-- .element: class="fragment" -->
+
+"
+							 data-separator-vertical="^
+
+"
+							 data-separator-notes="^Note:"
+							 data-charset="iso-8859-15" >
+  <script type="text/template">
+    ## well this all works
+
+
+
+## but it would be nice if it could be more automated
+
+
+
+## enter from stage left
+
+
+
+## The Dockerfile
 
   </script>
 </section> 
@@ -718,29 +740,25 @@ show the logs of a running container
 							 data-separator-notes="^Note:"
 							 data-charset="iso-8859-15" >
   <script type="text/template">
-    <section>
-<h3>pulling code</h3>
-</section>
+    ### pulling code
 
-<section>
+
 <h2>pull the latest release of this presantation</h2>
-<pre><code data-trim contenteditable>
+```
 wget "github.com/dfedde/docker_workshop/releases/download/1.0.1/docker-workshop.tar.gz"
 tar xvzf docker-workshop.tar.gz
 cd build
 ls
-</code></pre>
-</section>
+```
 
 
 ## what did we just do?
 
-### pulled down all the image code
-### got a gt
+### pulled down all the class code 
+### have a new Dockerfile
 
-<section>
-<h2>what do I put in this new file?</h2>
-</section>
+
+### what do I put in this new file? 
 
   </script>
 </section> 
@@ -1025,7 +1043,59 @@ push your image up to dockerhub
 </div>
 
 
-## now lets get that on the server
+## we now have
+
+  </script>
+</section> 
+<section data-markdown
+         data-separator="^
+
+
+"
+							 data-separator-vertical="^
+
+"
+							 data-separator-notes="^Note:"
+							 data-charset="iso-8859-15" >
+  <script type="text/template">
+    <!-- .slide: data-transition="slide" data-background-image="assets/all-docker.jpg" -->
+
+  </script>
+</section> 
+<section data-markdown
+         data-separator="^
+
+
+"
+							 data-separator-vertical="^
+
+"
+							 data-separator-notes="^Note:"
+							 data-charset="iso-8859-15" >
+  <script type="text/template">
+    ### In the next episode
+<!-- .slide: data-transition="fade" -->
+
+
+
+### Containers
+<!-- .slide: data-transition="fade" -->
+
+
+
+### Services
+<!-- .slide: data-transition="fade" -->
+
+
+
+### Pods
+<!-- .slide: data-transition="fade" -->
+
+
+
+<!-- data-transition-speed="slow" .slide: data-transition="fade" data-background-image="assets/kubernates-logo.jpg" -->
+
+
 
   </script>
 </section> 
