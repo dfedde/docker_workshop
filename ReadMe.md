@@ -14,3 +14,7 @@ To Use
 
     docker build -t yourname/docker_workshop .
     docker run -p 80:80 -d yourname/docker_workshop
+
+update reveal
+=============
+git subtree pull --prefix "reveal" git@github.com:hakimel/reveal.js.git master --squash
