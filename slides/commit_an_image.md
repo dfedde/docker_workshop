@@ -11,7 +11,7 @@ echo "daemon off;" >> /etc/nginx/nginx.conf
 exit
 # out of the docker
 docker ps -l
-docker commit `docker ps -lq` yourname/dockerclass
+docker commit "$(docker ps -lq)" yourname/dockerclass
 docker run -d -P yourname/dockerclass service nginx start
 docker ps
 </code></pre>
@@ -25,7 +25,7 @@ docker ps
 <span data-fragment-index=2 class="fragment highlight-current-green">exit</span>
 
 <span data-fragment-index=3 class="fragment highlight-current-green">docker ps -l</span>
-<span data-fragment-index=5 class="fragment highlight-current-green">docker commit</span> $(docker ps -l <span data-fragment-index=4 class="fragment highlight-current-green">-q</span>) yourname/dockerclass
+<span data-fragment-index=5 class="fragment highlight-current-green">docker commit</span> "$(docker ps -l <span data-fragment-index=4 class="fragment highlight-current-green">-q</span>") yourname/dockerclass
 <span data-fragment-index=7 class="fragment highlight-current-green">docker run <span data-fragment-index=8 class="fragment highlight-current-green">-d</span> -p 80:80 yourname/dockerclass service nginx start</span>
 docker ps
 </pre>

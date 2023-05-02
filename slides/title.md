@@ -1,11 +1,10 @@
 <section>
   <image style="border:none;" src="http://upload.wikimedia.org/wikipedia/commons/7/79/Docker_%28container_engine%29_logo.png">
   <div class="fragment">
-  <h1>Not</h1>
-  <image style="border:none;" src="http://www.pantalones.net/files/2011/03/logo-dockers.jpg">
+  <h1>A whale of a time</h1>
   </div>
   <p>
-  <small>Created by <a href="http://duncan.fedde.us">Duncan Fedde</a> / <a href="http://twitter.com/dfedde">@dfedde</a></small>
+  <small>Created by <a href="http://duncan.fedde.us">Dyan Fedde</a> / <a href="http://twitter.com/dfedde">@dfedde</a></small>
   </p>
   <aside class="notes">
   Goals for this presentation:

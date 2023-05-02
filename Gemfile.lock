@@ -1,5 +1,5 @@
 PATH
-  remote: ../../workspace/classanator
+  remote: ../classanator
   specs:
     classanator (0.1.0)
 
@@ -14,4 +14,4 @@ DEPENDENCIES
   classanator!
 
 BUNDLED WITH
-   1.16.1
+   2.4.9

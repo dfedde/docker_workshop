@@ -1,21 +1,22 @@
 #TODO: remove done
-#TODO: updagte the what did we just do sec
+#TODO: update the what did we just do sec
 Title: this is the class title
 slides:
-  - file: title.md #TODO: find a new joke
-  - file: intro.md #TODO: make a little more simple
+  - file: title.md # ✔️
+  - file: intro.md # ✔️
   - file: what_is_docker.md 
   - file: vocab.md # ✔️
-  - file: get_setup.md #TODO: decide how the user will use GCP
+  - file: get_setup.md
   - file: hello_docker.md # ✔️
   - file: manual_nginx.md # ✔️
 
   - file: imagevscontainer.md # ✔️
 
   - file: commit_an_image.md # ✔️ 
-    #TODO: add a slide to explain image name format
+  - file: image_name_format.md
   - file: tagging_an_image.md # ✔️
-  - file: adding_slide_files.md #TODO: fix how the fies get into the image should be a github release
+  - file: adding_slide_files.md #  ✔️
+  - file: stopping_a_container.md #  ✔️
 
   - file: lookatrunningcontainers.md # ✔️
 
@@ -23,7 +24,7 @@ slides:
 
     #- file: deploy_handmade.md
 
-  - file: pull_slide_code.md #TODO: fix how the fies get into the image saem github release
+  - file: pull_slide_code.md #TODO: fix how the fies get into the image same github release
   - file: make_a_dockerfile.md
   - file: copy_code_into_image.md
   - file: volumes.md
